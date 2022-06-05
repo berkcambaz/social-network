@@ -10,7 +10,7 @@ const router = useRouter();
   <div class="bar">
     <IconLeft class="icon back" v-if="router.currentRoute.value.meta.showBackButton" @click="router.back()" />
     <IconMenu class="icon menu" />
-    <div class="route">Home</div>
+    <div class="route">{{ router.currentRoute.value.name }}</div>
   </div>
 </template>
 

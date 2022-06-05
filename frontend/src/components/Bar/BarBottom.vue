@@ -13,7 +13,7 @@ const users = useUsers();
 <template>
   <div class="bar" v-if="!router.currentRoute.value.meta.hideBottomBar">
     <IconHome class="icon" @click="router.push('/home')" />
-    <IconUser class="icon" @click="router.push(`/user/${users.getCurrentUser?.tag}`)" />
+    <IconUser class="icon" @click="router.push(`/profile/${users.getCurrentUser?.tag}`)" />
     <IconSearch class="icon" />
     <IconPencil class="icon" />
   </div>

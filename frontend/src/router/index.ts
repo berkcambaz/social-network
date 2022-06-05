@@ -44,9 +44,9 @@ const router = createRouter({
       beforeEnter
     },
     {
-      path: "/user/:id",
-      name: "User",
-      component: () => import("../views/UserView.vue"),
+      path: "/profile/:id",
+      name: "Profile",
+      component: () => import("../views/ProfileView.vue"),
       meta: { showBackButton: true },
       beforeEnter
     }
