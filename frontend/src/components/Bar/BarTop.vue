@@ -1,11 +1,14 @@
 <script setup lang="ts">
+import { useRouter } from "vue-router";
 import IconLeft from "../Icon/IconLeft.vue";
 import IconMenu from "../Icon/IconMenu.vue";
+
+const router = useRouter();
 </script>
 
 <template>
   <div class="bar">
-    <IconLeft class="icon back" />
+    <IconLeft class="icon back" v-if="router.currentRoute.value.meta.showBackButton" @click="router.back()" />
     <IconMenu class="icon menu" />
     <div class="route">Home</div>
   </div>

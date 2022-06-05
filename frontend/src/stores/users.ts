@@ -2,7 +2,7 @@ import type { IUser } from "@/types/user";
 import { defineStore } from "pinia";
 
 interface State {
-  current: number;
+  current: number | null;
   entities: { [key: number]: IUser };
   ids: number[];
 }
@@ -27,6 +27,6 @@ export const useUsers = defineStore("users", {
     getUserById: (state) => {
       return (id: number) => state.entities[id]
     },
-    getCurrentUser: (state) => state.entities[state.current]
+    getCurrentUser: (state) => state.current !== null ? state.entities[state.current] : null
   }
 })
