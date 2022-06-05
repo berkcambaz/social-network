@@ -24,11 +24,20 @@
 
 .input {
   border: 0;
+  border-radius: 0;
   outline: 0;
   border-bottom: 1px solid #000000;
 }
 
-.button {}
+.button {
+  cursor: pointer;
+
+  border: 0;
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  background-color: #000000;
+  color: #ffffff;
+}
 
 .text {
   cursor: pointer;
