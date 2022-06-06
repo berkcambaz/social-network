@@ -17,7 +17,7 @@ const user = users.getUserById(post.userId);
 <template>
   <div class="container">
     <div class="top">
-      <span class="user-info" @click="router.push(`/user/${user.tag}`)">
+      <span class="user-info" @click="router.push(`/profile/${user.tag}`)">
         <span>{{ user.name }}</span>
         <span class=" user-tag">@{{ user.tag }}</span>
       </span>

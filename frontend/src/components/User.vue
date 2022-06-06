@@ -11,6 +11,7 @@ const user = users.getUserById(userId);
   <div class="container">
     <div class="username">{{ user.name }}</div>
     <div class="usertag">@{{ user.tag }}</div>
+    <div class="bio">{{ user.bio }}</div>
     <div class="date">
       <IconCalendar />
       May 2022
@@ -34,6 +35,10 @@ const user = users.getUserById(userId);
 
 .usertag {
   font-size: 0.875rem;
+}
+
+.bio {
+  margin: 0.5rem 0;
 }
 
 .date {
