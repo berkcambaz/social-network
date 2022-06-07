@@ -26,6 +26,7 @@ const send = () => {
   posts.post(elem.value);
   elem.value = "";
   text.current = 0;
+  oninput();
 }
 
 onMounted(() => {
