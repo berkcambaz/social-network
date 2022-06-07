@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "scripts": {
     "build": "rimraf ./dist && tsc",
-    "dev": "ts-node-dev --respawn src/index.ts",
+    "dev": "ts-node-dev --respawn --quiet src/index.ts",
     "prod": "node dist/index.js"
   },
   "devDependencies": {
@@ -13,6 +13,8 @@
     "typescript": "^4.7.3"
   },
   "dependencies": {
+    "@fastify/cookie": "^6.0.0",
+    "@fastify/static": "^5.0.2",
     "fastify": "^3.29.0"
   }
 }
