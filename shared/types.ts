@@ -12,6 +12,11 @@ export enum ApiCode {
   SetProfile = "setprofile"
 }
 
+export interface ApiSchema {
+  type: ApiCode;
+  data: any;
+}
+
 export interface ApiReq {
   [ApiCode.Auth]: {};
 
