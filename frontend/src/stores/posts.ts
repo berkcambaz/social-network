@@ -1,8 +1,8 @@
-import type { IPost } from "@/types/post";
 import { defineStore } from "pinia";
+import type { ApiCode, ApiRes } from "../../../shared/types";
 
 interface State {
-  entities: { [key: number]: IPost },
+  entities: { [key: number]: ApiRes[ApiCode.GetPost] },
   ids: number[]
 }
 

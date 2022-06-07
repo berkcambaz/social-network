@@ -1,9 +1,9 @@
-import type { IUser } from "@/types/user";
 import { defineStore } from "pinia";
+import type { ApiCode, ApiRes } from "../../../shared/types";
 
 interface State {
   current: number | null;
-  entities: { [key: number]: IUser };
+  entities: { [key: number]: ApiRes[ApiCode.GetProfile] };
   ids: number[];
 }
 

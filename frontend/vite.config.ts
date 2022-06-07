@@ -12,6 +12,9 @@ export default defineConfig({
     }
   },
   server: {
-    host: true
+    host: true,
+    proxy: {
+      "/api": "http://0.0.0.0:3333"
+    }
   }
 })
