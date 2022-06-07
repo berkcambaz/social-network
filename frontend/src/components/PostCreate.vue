@@ -25,7 +25,6 @@ const send = () => {
   if (!elem) return;
   posts.post(elem.value);
   elem.value = "";
-  text.current = 0;
   oninput();
 }
 
