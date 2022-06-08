@@ -1,19 +1,21 @@
 export enum ApiCode {
-  Auth = "auth",
+  Auth,
 
-  Login = "login",
-  Signup = "signup",
-  Logout = "logout",
+  Login,
+  Signup,
+  Logout,
 
-  PostPost = "postpost",
-  GetPost = "getpost",
+  PostPost,
+  GetPost,
 
-  GetProfile = "getprofile",
-  SetProfile = "setprofile"
+  GetProfile,
+  SetProfile
 }
 
 export enum ApiError {
-
+  AuthFail,
+  LoginFail,
+  SignupFail,
 }
 
 export interface ApiReqSchema {
@@ -22,8 +24,8 @@ export interface ApiReqSchema {
 }
 
 export interface ApiResSchema {
-  data: any;
-  err: ApiError;
+  data?: any;
+  err?: ApiError;
 }
 
 export interface ApiReq {

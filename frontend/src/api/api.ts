@@ -9,5 +9,7 @@ export async function api<T extends ApiCode>(type: T, req: ApiReq[T]) {
     body: JSON.stringify({ type, data: req })
   })
 
-  return res.json();
+  const json = await res.json();
+  console.log(json);
+  return json;
 }

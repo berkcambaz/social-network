@@ -1,9 +1,10 @@
-require('dotenv').config();
+import { config } from "dotenv";
+config();
 
 import { fastify } from "fastify";
 import { fastifyStatic } from "@fastify/static";
 import { fastifyCookie } from "@fastify/cookie";
-import path = require("path");
+import * as path from "path";
 
 import { Api } from "./api";
 

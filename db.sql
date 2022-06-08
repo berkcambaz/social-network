@@ -2,7 +2,7 @@ CREATE TABLE `profile` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(32) NOT NULL,
   `tag` varchar(16) NOT NULL,
-  `email` varchar(254) NOT NULL,
+  `email` varchar(320) NOT NULL,
   `password` binary(60) NOT NULL,
   `date` int(11) NOT NULL,
   `bio` varchar(128) NOT NULL,
