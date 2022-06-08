@@ -12,9 +12,18 @@ export enum ApiCode {
   SetProfile = "setprofile"
 }
 
-export interface ApiSchema {
+export enum ApiError {
+
+}
+
+export interface ApiReqSchema {
   type: ApiCode;
   data: any;
+}
+
+export interface ApiResSchema {
+  data: any;
+  err: ApiError;
 }
 
 export interface ApiReq {
