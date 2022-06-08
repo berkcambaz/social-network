@@ -1,14 +1,26 @@
 <script setup lang="ts">
+import { api } from '@/api/api';
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { ApiCode } from '../../../shared/types';
 
 const router = useRouter();
+
+const usertagInput = ref<HTMLInputElement>();
+const passwordInput = ref<HTMLInputElement>();
+const login = () => {
+  if (!usertagInput.value || !passwordInput.value) return;
+  const usertag = usertagInput.value.value;
+  const password = passwordInput.value.value;
+  api(ApiCode.Login, { usertag, password });
+}
 </script>
 
 <template>
   <div class="container">
-    <input class="input" type="text" placeholder="Usertag...">
-    <input class="input" type="password" placeholder="Password...">
-    <button class="button">Login</button>
+    <input class="input" ref="usertagInput" type="text" placeholder="Usertag...">
+    <input class="input" ref="passwordInput" type="password" placeholder="Password...">
+    <button class="button" @click="login">Login</button>
     <span class="text" @click="router.push('/signup')">I don't have an account</span>
   </div>
 </template>

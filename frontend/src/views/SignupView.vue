@@ -1,15 +1,29 @@
 <script setup lang="ts">
+import { api } from '@/api/api';
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { ApiCode } from '../../../shared/types';
 
 const router = useRouter();
+
+const usertagInput = ref<HTMLInputElement>();
+const emailInput = ref<HTMLInputElement>();
+const passwordInput = ref<HTMLInputElement>();
+const signup = () => {
+  if (!usertagInput.value || !emailInput.value || !passwordInput.value) return;
+  const usertag = usertagInput.value.value;
+  const email = emailInput.value.value;
+  const password = passwordInput.value.value;
+  api(ApiCode.Signup, { usertag, email, password });
+}
 </script>
 
 <template>
   <div class="container">
-    <input class="input" type="text" placeholder="Usertag...">
-    <input class="input" type="email" placeholder="Email...">
-    <input class="input" type="password" placeholder="Password...">
-    <button class="button">Signup</button>
+    <input class="input" ref="usertagInput" type="text" placeholder="Usertag...">
+    <input class="input" ref="emailInput" type="email" placeholder="Email...">
+    <input class="input" ref="passwordInput" type="password" placeholder="Password...">
+    <button class="button" @click="signup">Signup</button>
     <span class="text" @click="router.push('/login')">I already have an account</span>
   </div>
 </template>

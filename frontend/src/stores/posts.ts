@@ -8,18 +8,8 @@ interface State {
 
 export const usePosts = defineStore("posts", {
   state: (): State => ({
-    entities: {
-      0: {
-        id: 0,
-        userId: 0,
-        date: 1234567890,
-        content: "Hello, world!",
-        likeCount: 123,
-        liked: true,
-        bookmarked: true
-      }
-    },
-    ids: [0]
+    entities: {},
+    ids: []
   }),
   getters: {
     getAllPosts: (state) => state.ids,

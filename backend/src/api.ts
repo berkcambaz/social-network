@@ -1,4 +1,4 @@
-import { ApiCode, ApiSchema } from "../../shared/types";
+import { ApiCode, ApiReqSchema } from "../../shared/types";
 import { auth } from "./api/auth";
 import { login } from "./api/login";
 import { logout } from "./api/logout";
@@ -8,8 +8,8 @@ import { ReqType, ResType } from "./types";
 export class Api {
   public handle(req: ReqType, res: ResType) {
     console.log(req.body);
+    const schema: ApiReqSchema = req.body as ApiReqSchema;
     if (!req.body) return;
-    const schema: ApiSchema = JSON.parse(req.body as string);
 
     switch (schema.type) {
       case ApiCode.Auth: auth(req, res, schema.data); break;
