@@ -3,6 +3,7 @@ import { ReqType, ResType } from "../types";
 import { validate } from "email-validator";
 import * as bcrypt from "bcrypt";
 import { DB } from "../db";
+import { generateToken, saveToken, setToken } from "./auth";
 
 export async function signup(req: ReqType, res: ResType, data: ApiReq[ApiCode.Signup]) {
   if (data.usertag.length < 3) return res.send({ err: ApiError.SignupFail });
@@ -21,5 +22,11 @@ export async function signup(req: ReqType, res: ResType, data: ApiReq[ApiCode.Si
   `, [tag, tag, email, hash]);
 
   if (err) return res.send({ err: ApiError.SignupFail });
+
+  const userId = result.insertId;
+  const token = generateToken();
+  const saved = await saveToken(token, userId);
+  if (saved) setToken(res, token);
+
   return res.send({ data: {} });
 }
