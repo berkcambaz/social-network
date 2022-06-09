@@ -2,8 +2,8 @@ import { ApiCode, ApiReq } from "../../../shared/types";
 import { ReqType, ResType } from "../types";
 import * as srandom from "secure-random";
 
-export function auth(req: ReqType, res: ResType, data: ApiReq[ApiCode.Auth]) {
-  return false;
+export function auth(req: ReqType, res: ResType, data: ApiReq[ApiCode.Auth]): null | number {
+  return null;
 }
 
 export function generateToken() {

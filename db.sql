@@ -31,3 +31,11 @@ CREATE TABLE `bookmark` (
   `post_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL
 )
+
+CREATE TABLE `session` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `token` char(32) NOT NULL, 
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `token` (`token`),
+)

@@ -17,13 +17,14 @@ export class Api {
       default: break;
     }
 
-    if (!await auth(req, res, schema.data)) {
+    const userId = await auth(req, res, schema.data);
+    if (userId === null) {
       res.send({ err: ApiError.AuthFail } as ApiResSchema);
       return;
     }
 
     switch (schema.type) {
-      case ApiCode.Logout: await logout(req, res, schema.data); return;
+      case ApiCode.Logout: await logout(req, res, userId, schema.data); return;
       default: break;
     }
   }
