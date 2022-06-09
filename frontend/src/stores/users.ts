@@ -3,7 +3,7 @@ import type { ApiCode, ApiRes } from "../../../shared/types";
 
 interface State {
   current: number | null;
-  entities: { [key: number]: ApiRes[ApiCode.GetProfile] };
+  entities: { [key: number]: ApiRes[ApiCode.GetUser] };
   ids: number[];
 }
 

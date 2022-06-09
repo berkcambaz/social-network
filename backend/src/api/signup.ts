@@ -16,7 +16,7 @@ export async function signup(req: ReqType, res: ResType, data: ApiReq[ApiCode.Si
   const hash = await bcrypt.hash(data.password, 10);
 
   const { result, err } = await DB.query(`
-    INSERT INTO profile (name, tag, email, password, date, bio, following_count, follower_count)
+    INSERT INTO user (name, tag, email, password, date, bio, following_count, follower_count)
     VALUES (?, ?, ?, ?, UNIX_TIMESTAMP(), "", 0, 0)
   `, [tag, tag, email, hash]);
 

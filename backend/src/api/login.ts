@@ -13,7 +13,7 @@ export async function login(req: ReqType, res: ResType, data: ApiReq[ApiCode.Log
   const password = data.password;
 
   const { result, err } = await DB.query(`
-    SELECT id, password FROM profile
+    SELECT id, password FROM user
     WHERE tag=?
   `, [tag]);
 

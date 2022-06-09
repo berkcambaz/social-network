@@ -8,8 +8,8 @@ export enum ApiCode {
   PostPost,
   GetPost,
 
-  GetProfile,
-  SetProfile
+  GetUser,
+  SetUser
 }
 
 export enum ApiError {
@@ -50,10 +50,10 @@ export interface ApiReq {
 
   };
 
-  [ApiCode.GetProfile]: {
+  [ApiCode.GetUser]: {
     userId: number;
   };
-  [ApiCode.SetProfile]: {
+  [ApiCode.SetUser]: {
 
   };
 }
@@ -76,7 +76,7 @@ export interface ApiRes {
     bookmarked: boolean;
   };
 
-  [ApiCode.GetProfile]: {
+  [ApiCode.GetUser]: {
     id: number;
     name: string;
     tag: string;

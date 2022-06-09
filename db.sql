@@ -1,4 +1,4 @@
-CREATE TABLE `profile` (
+CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(32) NOT NULL,
   `tag` varchar(16) NOT NULL,
