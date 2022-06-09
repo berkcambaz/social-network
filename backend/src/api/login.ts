@@ -1,4 +1,4 @@
-import { ApiCode, ApiError, ApiReq } from "../../../shared/types";
+import { ApiCode, ApiError, ApiReq, ApiResSchema } from "../../../shared/types";
 import { ReqType, ResType } from "../types";
 import * as bcrypt from "bcrypt";
 import { DB } from "../db";

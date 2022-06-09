@@ -21,5 +21,5 @@ export async function signup(req: ReqType, res: ResType, data: ApiReq[ApiCode.Si
   `, [tag, tag, email, hash]);
 
   if (err) return res.send({ err: ApiError.SignupFail });
-  return res.send({ data: {} });
+  return res.send({ data: { id: result.insertId } });
 }
