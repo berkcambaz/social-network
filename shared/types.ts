@@ -1,3 +1,23 @@
+export interface IUser {
+  id: number;
+  name: string;
+  tag: string;
+  bio: string;
+  date: number;
+  followerCount: number;
+  followingCount: number;
+}
+
+export interface IPost {
+  id: number;
+  userId: number;
+  date: number;
+  content: string;
+  likeCount: number;
+  liked: boolean;
+  bookmarked: boolean;
+}
+
 export enum ApiCode {
   Auth,
 
@@ -67,22 +87,10 @@ export interface ApiRes {
   }
 
   [ApiCode.GetPost]: {
-    id: number;
-    userId: number;
-    date: number;
-    content: string;
-    likeCount: number;
-    liked: boolean;
-    bookmarked: boolean;
+
   };
 
   [ApiCode.GetUser]: {
-    id: number;
-    name: string;
-    tag: string;
-    bio: string;
-    date: number;
-    followerCount: number;
-    followingCount: number;
+
   };
 }
