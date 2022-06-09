@@ -1,4 +1,4 @@
-import { ApiCode, ApiError, ApiReqSchema, ApiResSchema } from "../../shared/types";
+import { ApiCode, ApiError, ApiReqSchema, ApiRes, ApiResSchema } from "../../shared/types";
 import { auth } from "./api/auth";
 import { login } from "./api/login";
 import { logout } from "./api/logout";
@@ -8,7 +8,7 @@ import { ReqType, ResType } from "./types";
 export class Api {
   public static async handle(req: ReqType, res: ResType) {
     console.log(req.body);
-    const schema: ApiReqSchema = req.body as ApiReqSchema;
+    const schema: ApiReqSchema<any> = req.body as ApiReqSchema<any>;
     if (!req.body) return;
 
     switch (schema.type) {
@@ -18,10 +18,8 @@ export class Api {
     }
 
     const userId = await auth(req, res, schema.data);
-    if (userId === null) {
-      res.send({ err: ApiError.AuthFail } as ApiResSchema);
-      return;
-    }
+    if (userId === null) return res.send({ err: ApiError.AuthFail } as ApiRes[ApiCode.Auth]);
+    if (schema.type === ApiCode.Auth) return res.send({ data: { id: userId } } as ApiRes[ApiCode.Auth])
 
     switch (schema.type) {
       case ApiCode.Logout: await logout(req, res, userId, schema.data); return;

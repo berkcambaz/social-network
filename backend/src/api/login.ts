@@ -26,5 +26,5 @@ export async function login(req: ReqType, res: ResType, data: ApiReq[ApiCode.Log
   const saved = await saveToken(token, userId);
   if (saved) setToken(res, token);
 
-  return res.send({ data: {} });
+  return res.send({ data: { id: userId } });
 }

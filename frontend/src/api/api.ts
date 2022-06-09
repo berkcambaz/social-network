@@ -1,6 +1,6 @@
-import type { ApiCode, ApiReq } from "../../../shared/types";
+import type { ApiCode, ApiReq, ApiRes } from "../../../shared/types";
 
-export async function api<T extends ApiCode>(type: T, req: ApiReq[T]) {
+export async function api<T extends ApiCode>(type: T, req: ApiReq[T]): Promise<ApiRes[T]> {
   const res = await fetch("/api", {
     method: "POST",
     headers: {

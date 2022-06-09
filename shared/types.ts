@@ -38,19 +38,18 @@ export enum ApiError {
   SignupFail,
 }
 
-export interface ApiReqSchema {
+export interface ApiReqSchema<T> {
   type: ApiCode;
-  data: any;
+  data: T;
 }
 
-export interface ApiResSchema {
-  data?: any;
+export interface ApiResSchema<T> {
+  data?: T;
   err?: ApiError;
 }
 
 export interface ApiReq {
   [ApiCode.Auth]: {};
-
   [ApiCode.Login]: {
     usertag: string;
     password: string;
@@ -62,35 +61,30 @@ export interface ApiReq {
   };
   [ApiCode.Logout]: {};
 
-  [ApiCode.PostPost]: {
-    userId: number;
-    content: string;
-  };
-  [ApiCode.GetPost]: {
+  [ApiCode.PostPost]: {};
+  [ApiCode.GetPost]: {};
 
-  };
-
-  [ApiCode.GetUser]: {
-    userId: number;
-  };
-  [ApiCode.SetUser]: {
-
-  };
+  [ApiCode.GetUser]: {};
+  [ApiCode.SetUser]: {};
 }
 
 export interface ApiRes {
-  [ApiCode.Login]: {
-    id: number;
-  }
-  [ApiCode.Signup]: {
-    id: number;
-  }
+  [ApiCode.Auth]: ApiResSchema<{ id: number }>
+  [ApiCode.Login]: ApiResSchema<{ id: number }>
+  [ApiCode.Signup]: ApiResSchema<{ id: number }>
+  [ApiCode.Logout]: ApiResSchema<{}>
 
   [ApiCode.GetPost]: {
 
   };
+  [ApiCode.PostPost]: {
+
+  };
 
   [ApiCode.GetUser]: {
+
+  };
+  [ApiCode.SetUser]: {
 
   };
 }

@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { api } from '@/api/api';
+import { useUsers } from '@/stores/users';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { ApiCode } from '../../../shared/types';
 
 const router = useRouter();
+const users = useUsers();
 
 const usertagInput = ref<HTMLInputElement>();
 const emailInput = ref<HTMLInputElement>();
@@ -14,7 +16,7 @@ const signup = () => {
   const usertag = usertagInput.value.value;
   const email = emailInput.value.value;
   const password = passwordInput.value.value;
-  api(ApiCode.Signup, { usertag, email, password });
+  users.signup(usertag, email, password);
 }
 </script>
 
