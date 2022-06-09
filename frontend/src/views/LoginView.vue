@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { api } from '@/api/api';
+import { useUsers } from '@/stores/users';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { ApiCode } from '../../../shared/types';
 
 const router = useRouter();
+const users = useUsers();
 
 const usertagInput = ref<HTMLInputElement>();
 const passwordInput = ref<HTMLInputElement>();
@@ -12,7 +14,7 @@ const login = () => {
   if (!usertagInput.value || !passwordInput.value) return;
   const usertag = usertagInput.value.value;
   const password = passwordInput.value.value;
-  api(ApiCode.Login, { usertag, password });
+  users.login(usertag, password);
 }
 </script>
 
