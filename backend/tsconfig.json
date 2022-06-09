@@ -2,7 +2,8 @@
   "compilerOptions": {
     "strict": true,
     "outDir": "./dist",
-    "removeComments": true
+    "removeComments": true,
+    "downlevelIteration": true
   },
   "include": [
     "src/**/*",

@@ -13,11 +13,11 @@ export async function login(req: ReqType, res: ResType, data: ApiReq[ApiCode.Log
   const password = data.password;
 
   const { result, err } = await DB.query(`
-    SELECT id, password FROM user
+    SELECT password FROM user
     WHERE tag=?
   `, [tag]);
 
   if (result.length === 0 || err) return res.send({ err: ApiError.LoginFail });
   if (!await bcrypt.compare(password, result[0].password)) return res.send({ err: ApiError.LoginFail });
-  return res.send({ data: { id: result[0].id } });
+  return res.send({ data: {} });
 }
