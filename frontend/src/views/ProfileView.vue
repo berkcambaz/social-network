@@ -2,12 +2,13 @@
 import { useRouter } from 'vue-router';
 import User from '../components/User.vue';
 import PostLister from '../components/PostLister.vue';
+import { useUsers } from '@/stores/users';
 
-const router = useRouter();
+const users = useUsers();
 
 </script>
 
 <template>
-  <User :userId="0" />
+  <User :userId="(users.$state.current as number)" />
   <PostLister />
 </template>

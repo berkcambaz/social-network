@@ -1,15 +1,15 @@
 import { useUsers } from '@/stores/users';
 import { createRouter, createWebHistory, type RouteLocationNormalized } from 'vue-router'
 
-function beforeEnter(route: RouteLocationNormalized) {
+async function beforeEnter(route: RouteLocationNormalized) {
   const users = useUsers();
 
-  if (!route.meta.forGuests && !users.getCurrentUser) {
+  if (!route.meta.forGuests && users.$state.current === null) {
     router.push("/login");
     return;
   }
 
-  if (route.meta.forGuests && users.getCurrentUser) {
+  if (route.meta.forGuests && users.$state.current !== null) {
     router.push("/home");
     return;
   }

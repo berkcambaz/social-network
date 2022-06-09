@@ -8,14 +8,4 @@ const posts = usePosts();
 
 <template>
   <Post v-for="postId in posts.getAllPosts" :postId="postId" :key="postId" />
-  <Post :postId="0" />
-  <Post :postId="0" />
-  <Post :postId="0" />
-  <Post :postId="0" />
-  <Post :postId="0" />
-  <Post :postId="0" />
-  <Post :postId="0" />
-  <Post :postId="0" />
-  <Post :postId="0" />
-  <Post :postId="0" />
 </template>

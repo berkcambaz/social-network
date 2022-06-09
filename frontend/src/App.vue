@@ -2,6 +2,10 @@
 import { RouterView } from 'vue-router'
 import BarTop from './components/Bar/BarTop.vue'
 import BarBottom from './components/Bar/BarBottom.vue'
+import { useUsers } from './stores/users';
+
+const users = useUsers();
+users.auth();
 </script>
 
 <template>
