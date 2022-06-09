@@ -59,6 +59,13 @@ export interface ApiReq {
 }
 
 export interface ApiRes {
+  [ApiCode.Login]: {
+    id: number;
+  }
+  [ApiCode.Signup]: {
+    id: number;
+  }
+
   [ApiCode.GetPost]: {
     id: number;
     userId: number;

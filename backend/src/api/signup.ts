@@ -1,9 +1,8 @@
-import { ApiCode, ApiError, ApiReq, ApiResSchema } from "../../../shared/types";
+import { ApiCode, ApiError, ApiReq } from "../../../shared/types";
 import { ReqType, ResType } from "../types";
 import { validate } from "email-validator";
-import { db } from "../db";
 import * as bcrypt from "bcrypt";
-import { ResultSetHeader } from "mysql2";
+import { DB } from "../db";
 
 export async function signup(req: ReqType, res: ResType, data: ApiReq[ApiCode.Signup]) {
   if (data.usertag.length < 3) return res.send({ err: ApiError.SignupFail });
@@ -14,19 +13,13 @@ export async function signup(req: ReqType, res: ResType, data: ApiReq[ApiCode.Si
 
   const tag = data.usertag;
   const email = data.email;
-  const password = await bcrypt.hash(data.password, 10);
+  const hash = await bcrypt.hash(data.password, 10);
 
-  const a = await db.execute(`
+  const { result, err } = await DB.query(`
     INSERT INTO profile (name, tag, email, password, date, bio, following_count, follower_count)
     VALUES (?, ?, ?, ?, UNIX_TIMESTAMP(), "", 0, 0)
-  `, [tag, tag, email, password],
-    (err, result, fields) => {
-      console.log(1);
-      if (err) return res.send({ err: ApiError.SignupFail });
-      res.send({ data: {} });
+  `, [tag, tag, email, hash]);
 
-
-    }
-  );
-  console.log(2);
+  if (err) return res.send({ err: ApiError.SignupFail });
+  return res.send({ data: {} });
 }

@@ -6,24 +6,24 @@ import { signup } from "./api/signup";
 import { ReqType, ResType } from "./types";
 
 export class Api {
-  public handle(req: ReqType, res: ResType) {
+  public static async handle(req: ReqType, res: ResType) {
     console.log(req.body);
     const schema: ApiReqSchema = req.body as ApiReqSchema;
     if (!req.body) return;
 
     switch (schema.type) {
-      case ApiCode.Login: login(req, res, schema.data); return;
-      case ApiCode.Signup: signup(req, res, schema.data); return;
+      case ApiCode.Login: await login(req, res, schema.data); return;
+      case ApiCode.Signup: await signup(req, res, schema.data); return;
       default: break;
     }
 
-    if (!auth(req, res, schema.data)) {
+    if (!await auth(req, res, schema.data)) {
       res.send({ err: ApiError.AuthFail } as ApiResSchema);
       return;
     }
 
     switch (schema.type) {
-      case ApiCode.Logout: logout(req, res, schema.data); return;
+      case ApiCode.Logout: await logout(req, res, schema.data); return;
       default: break;
     }
   }

@@ -21,6 +21,6 @@
     "dotenv": "^16.0.1",
     "email-validator": "^2.0.4",
     "fastify": "^3.29.0",
-    "mysql2": "^2.3.3"
+    "mysql": "^2.18.1"
   }
 }
