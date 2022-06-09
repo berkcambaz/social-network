@@ -46,3 +46,10 @@ export async function saveToken(token: string, userId: number): Promise<boolean>
   if (err) return false;
   return true;
 }
+
+export async function removeToken(token: string) {
+  const { result, err } = await DB.query(`
+    DELETE FROM session
+    WHERE token=?
+  `, [token]);
+}
