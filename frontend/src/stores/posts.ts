@@ -13,7 +13,7 @@ export const usePosts = defineStore("posts", {
     ids: []
   }),
   getters: {
-    getAllPosts: (state) => state.ids,
+    getAllPosts: (state) => state.entities,
     getPostById: (state) => {
       return (id: number) => state.entities[id]
     }
@@ -30,9 +30,9 @@ export const usePosts = defineStore("posts", {
     async post(content: string) {
       const { data, err } = await api(ApiCode.PostPost, { content });
       if (!data || err) return;
-      this.$state.entities[data.id] = data;
-      this.$state.ids.push(data.id);
-      console.log(data);
+      const post = data.post;
+      this.$state.entities[post.id] = post;
+      this.$state.ids.push(post.id);
     }
   }
 })

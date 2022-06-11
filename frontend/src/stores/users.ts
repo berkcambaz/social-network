@@ -46,5 +46,15 @@ export const useUsers = defineStore("users", {
       this.$state.current = null;
       router.push("/login");
     },
+    async getUsers(userId: number[]) {
+      if (userId.length === 0 || userId.length > 20) return;
+      const { data, err } = await api(ApiCode.GetUser, { userId });
+      if (err || !data) return;
+      const users = data.users;
+      users.forEach((user) => {
+        this.$state.entities[user.id] = user;
+        this.$state.ids.push(user.id);
+      })
+    }
   }
 })

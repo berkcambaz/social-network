@@ -4,6 +4,7 @@ import { login } from "./api/login";
 import { logout } from "./api/logout";
 import { postPost } from "./api/post";
 import { signup } from "./api/signup";
+import { getUser } from "./api/user";
 import { ReqType, ResType } from "./types";
 
 export class Api {
@@ -25,6 +26,7 @@ export class Api {
     switch (schema.type) {
       case ApiCode.Logout: await logout(req, res, userId, schema.data); return;
       case ApiCode.PostPost: await postPost(req, res, userId, schema.data); return;
+      case ApiCode.GetUser: await getUser(req, res, userId, schema.data); return;
       default: break;
     }
   }

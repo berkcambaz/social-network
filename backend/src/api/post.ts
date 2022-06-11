@@ -26,5 +26,5 @@ export async function postPost(req: ReqType, res: ResType, userId: number, data:
     liked: false,
     bookmarked: false
   };
-  return res.send({ data: post });
+  return res.send({ data: { post: post } });
 }

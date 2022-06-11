@@ -4,18 +4,20 @@ import { useUsers } from '@/stores/users';
 import IconHeart from './Icon/IconHeart.vue';
 import IconBookmark from './Icon/IconBookmark.vue';
 import { useRouter } from 'vue-router';
+import { ref } from 'vue';
+import type { IPost, IUser } from '../../../shared/types';
 
-const { postId } = defineProps<{ postId: number }>();
+const { user, post } = defineProps<{ user: IUser, post: IPost }>();
 const router = useRouter();
 const posts = usePosts();
 const users = useUsers();
-const post = posts.getPostById(postId);
-const user = users.getUserById(post.userId);
+if (!user) users.getUsers([post.userId]);
 
 </script>
 
 <template>
-  <div class="container">
+  <div v-if="!user">Loading...</div>
+  <div v-else class="container">
     <div class="top">
       <span class="user-info" @click="router.push(`/profile/${user.tag}`)">
         <span>{{ user.name }}</span>
