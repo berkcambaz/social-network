@@ -36,6 +36,8 @@ export enum ApiError {
   AuthFail,
   LoginFail,
   SignupFail,
+
+  PostPostFail,
 }
 
 export interface ApiReqSchema<T> {
@@ -61,7 +63,9 @@ export interface ApiReq {
   };
   [ApiCode.Logout]: {};
 
-  [ApiCode.PostPost]: {};
+  [ApiCode.PostPost]: {
+    content: string;
+  };
   [ApiCode.GetPost]: {};
 
   [ApiCode.GetUser]: {};
@@ -74,17 +78,9 @@ export interface ApiRes {
   [ApiCode.Signup]: ApiResSchema<{ id: number }>
   [ApiCode.Logout]: ApiResSchema<{}>
 
-  [ApiCode.GetPost]: {
+  [ApiCode.GetPost]: ApiResSchema<{}>
+  [ApiCode.PostPost]: ApiResSchema<IPost>
 
-  };
-  [ApiCode.PostPost]: {
-
-  };
-
-  [ApiCode.GetUser]: {
-
-  };
-  [ApiCode.SetUser]: {
-
-  };
+  [ApiCode.GetUser]: ApiResSchema<{}>
+  [ApiCode.SetUser]: ApiResSchema<{}>
 }
