@@ -29,17 +29,20 @@ export enum ApiCode {
   GetPost,
 
   GetUser,
-  SetUser
+  SetUser,
 }
 
 export enum ApiError {
   AuthFail,
+
   LoginFail,
   SignupFail,
 
   PostPostFail,
+  GetPostFail,
 
   GetUserFail,
+  SetUserFail,
 }
 
 export interface ApiReqSchema<T> {
@@ -68,7 +71,10 @@ export interface ApiReq {
   [ApiCode.PostPost]: {
     content: string;
   };
-  [ApiCode.GetPost]: {};
+  [ApiCode.GetPost]: {
+    anchor: number,
+    type: "newer" | "older"
+  };
 
   [ApiCode.GetUser]: {
     userId: number[]
@@ -82,7 +88,7 @@ export interface ApiRes {
   [ApiCode.Signup]: ApiResSchema<{ id: number }>
   [ApiCode.Logout]: ApiResSchema<{}>
 
-  [ApiCode.GetPost]: ApiResSchema<{}>
+  [ApiCode.GetPost]: ApiResSchema<{ posts: IPost[] }>
   [ApiCode.PostPost]: ApiResSchema<{ post: IPost }>
 
   [ApiCode.GetUser]: ApiResSchema<{ users: IUser[] }>

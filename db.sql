@@ -32,6 +32,11 @@ CREATE TABLE `bookmark` (
   `user_id` int(11) NOT NULL
 )
 
+CREATE TABLE `follow` (
+  `follower_id` int(11) NOT NULL,
+  `following_id` int(11) NOT NULL
+)
+
 CREATE TABLE `session` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
