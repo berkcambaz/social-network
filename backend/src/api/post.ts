@@ -8,7 +8,7 @@ export async function postPost(req: ReqType, res: ResType, userId: number, data:
   if (content.length > 256) return res.send({ err: ApiError.PostPostFail });
   if (content.length === 0) return res.send({ err: ApiError.PostPostFail });
 
-  const date = Date.now();
+  const date = Math.floor(Date.now() / 1000);
 
   const { result, err } = await DB.query(`
     INSERT INTO post (user_id, date, content, like_count)

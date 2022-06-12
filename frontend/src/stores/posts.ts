@@ -15,7 +15,11 @@ export const usePosts = defineStore("posts", {
     getState: "ready"
   }),
   getters: {
-    getAllPosts: (state) => state.entities,
+    getAllPosts: (state) => {
+      const posts: IPost[] = [];
+      state.ids.forEach(id => { posts.push(state.entities[id]) })
+      return posts;
+    },
     getPostById: (state) => {
       return (id: number) => state.entities[id]
     }
@@ -35,6 +39,7 @@ export const usePosts = defineStore("posts", {
       const post = data.post;
       this.$state.entities[post.id] = post;
       this.$state.ids.push(post.id);
+      this.sort();
     },
     async get() {
       if (this.getState !== "ready") return;
@@ -49,6 +54,10 @@ export const usePosts = defineStore("posts", {
         this.entities[post.id] = post;
         this.ids.push(post.id);
       })
+      this.sort();
+    },
+    sort() {
+      this.ids.sort((a, b) => (b - a));
     }
   }
 })
