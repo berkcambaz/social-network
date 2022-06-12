@@ -10,8 +10,6 @@ import type { IPost, IUser } from '../../../shared/types';
 const { user, post } = defineProps<{ user: IUser, post: IPost }>();
 const router = useRouter();
 const posts = usePosts();
-const users = useUsers();
-if (!user) users.getUsers([post.userId]);
 
 </script>
 
