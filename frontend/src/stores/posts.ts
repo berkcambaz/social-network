@@ -33,6 +33,15 @@ export const usePosts = defineStore("posts", {
       const post = data.post;
       this.$state.entities[post.id] = post;
       this.$state.ids.push(post.id);
+    },
+    async get() {
+      const { data, err } = await api(ApiCode.GetPost, { anchor: -1, type: "newer" });
+      if (!data || err) return;
+      const posts = data.posts;
+      posts.forEach(post => {
+        this.entities[post.id] = post;
+        this.ids.push(post.id);
+      })
     }
   }
 })

@@ -30,14 +30,30 @@ export async function postPost(req: ReqType, res: ResType, userId: number, data:
 }
 
 export async function getPost(req: ReqType, res: ResType, userId: number, data: ApiReq[ApiCode.GetPost]) {
-  const values = [userId];
+  const values = [userId, userId];
   if (data.anchor !== -1) values.push(data.anchor);
 
   const { result, err } = await DB.query(`
     SELECT id, user_id, date, content, like_count FROM post
-    INNER JOIN follow ON follow.follower_id=?
+    WHERE user_id in (SELECT following_id FROM follow WHERE follower_id=?) OR post.user_id=?
     ${data.anchor === -1 ? "" : data.type === "newer" ? "WHERE id>?" : "WHERE id<?"}
-    ORDER BY id ${data.type === "newer" ? "DESC" : "ASC"}
+    ORDER BY post.id ${data.type === "newer" ? "DESC" : "ASC"}
     LIMIT 25 
   `, values);
+
+  if (err) return res.send({ err: ApiError.GetPostFail });
+
+  const posts: IPost[] = []
+  result.forEach((post: any) => {
+    posts.push({
+      id: post.id,
+      userId: post.user_id,
+      date: post.date,
+      content: post.content,
+      likeCount: post.like_count,
+      liked: false,
+      bookmarked: false,
+    })
+  });
+  return res.send({ data: { posts } });
 }

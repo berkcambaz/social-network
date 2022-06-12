@@ -5,7 +5,7 @@ import Post from './Post.vue';
 
 const posts = usePosts();
 const users = useUsers();
-
+posts.get();
 </script>
 
 <template>
