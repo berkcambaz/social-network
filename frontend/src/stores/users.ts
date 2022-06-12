@@ -55,12 +55,15 @@ export const useUsers = defineStore("users", {
         return true;
       })
       if (userId.length === 0 || userId.length > 25) return;
+
       const { data, err } = await api(ApiCode.GetUser, { userId });
       if (err || !data) return;
+
       const users = data.users;
       users.forEach((user) => {
-        this.$state.entities[user.id] = user;
-        this.$state.ids.push(user.id);
+        this.entities[user.id] = user;
+        this.ids.push(user.id);
+        delete this.pendingIds[user.id];
       })
     }
   }
