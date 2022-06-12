@@ -49,6 +49,8 @@ export const useUsers = defineStore("users", {
       router.push("/login");
     },
     async getUsers(userId: number[]) {
+      if (Object.keys(this.pendingIds).length !== 0) return;
+
       userId = userId.filter(id => {
         if (this.pendingIds[id]) return false;
         this.pendingIds[id] = true;
@@ -57,13 +59,15 @@ export const useUsers = defineStore("users", {
       if (userId.length === 0 || userId.length > 25) return;
 
       const { data, err } = await api(ApiCode.GetUser, { userId });
+      userId.forEach(id => {
+        delete this.pendingIds[id];
+      });
       if (err || !data) return;
 
       const users = data.users;
       users.forEach((user) => {
         this.entities[user.id] = user;
         this.ids.push(user.id);
-        delete this.pendingIds[user.id];
       })
     }
   }

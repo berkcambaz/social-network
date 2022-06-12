@@ -4,13 +4,15 @@ import { ApiCode, type IPost } from "../../../shared/types";
 
 interface State {
   entities: { [key: number]: IPost },
-  ids: number[]
+  ids: number[],
+  getState: "ready" | "pending"
 }
 
 export const usePosts = defineStore("posts", {
   state: (): State => ({
     entities: {},
-    ids: []
+    ids: [],
+    getState: "ready"
   }),
   getters: {
     getAllPosts: (state) => state.entities,
@@ -35,8 +37,13 @@ export const usePosts = defineStore("posts", {
       this.$state.ids.push(post.id);
     },
     async get() {
+      if (this.getState !== "ready") return;
+      this.getState = "pending";
+
       const { data, err } = await api(ApiCode.GetPost, { anchor: -1, type: "newer" });
+      this.getState = "ready";
       if (!data || err) return;
+
       const posts = data.posts;
       posts.forEach(post => {
         this.entities[post.id] = post;

@@ -30,7 +30,7 @@ if (!user) users.getUsers([post.userId]);
         {{ post.content }}
       </div>
       <div class="reactions">
-        <span class="reaction-count">16</span>
+        <span class="reaction-count">{{ post.likeCount }}</span>
         <IconHeart class="reaction-icon" :class="{ active: post.liked }" @click="posts.like(post.id)" />
         <IconBookmark class="reaction-icon" :class="{ active: post.bookmarked }" @click="posts.bookmark(post.id)" />
       </div>
