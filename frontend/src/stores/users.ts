@@ -7,13 +7,15 @@ interface State {
   current: number | null;
   entities: { [key: number]: IUser };
   ids: number[];
+  pendingIds: { [key: number]: boolean };
 }
 
 export const useUsers = defineStore("users", {
   state: (): State => ({
     current: null,
     entities: {},
-    ids: []
+    ids: [],
+    pendingIds: []
   }),
   getters: {
     getUserById: (state) => {
@@ -47,7 +49,12 @@ export const useUsers = defineStore("users", {
       router.push("/login");
     },
     async getUsers(userId: number[]) {
-      if (userId.length === 0 || userId.length > 20) return;
+      userId = userId.filter(id => {
+        if (this.pendingIds[id]) return false;
+        this.pendingIds[id] = true;
+        return true;
+      })
+      if (userId.length === 0 || userId.length > 25) return;
       const { data, err } = await api(ApiCode.GetUser, { userId });
       if (err || !data) return;
       const users = data.users;
