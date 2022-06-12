@@ -27,6 +27,8 @@ export enum ApiCode {
 
   PostPost,
   GetPost,
+  LikePost,
+  BookmarkPost,
 
   GetUser,
   SetUser,
@@ -40,6 +42,9 @@ export enum ApiError {
 
   PostPostFail,
   GetPostFail,
+  LikePostFail,
+  BookmarkPostFail,
+
 
   GetUserFail,
   SetUserFail,
@@ -75,6 +80,8 @@ export interface ApiReq {
     anchor: number,
     type: "newer" | "older"
   };
+  [ApiCode.LikePost]: { postId: number, state: boolean };
+  [ApiCode.BookmarkPost]: { postId: number, state: boolean };
 
   [ApiCode.GetUser]: {
     userId: number[]
@@ -90,6 +97,8 @@ export interface ApiRes {
 
   [ApiCode.GetPost]: ApiResSchema<{ posts: IPost[] }>
   [ApiCode.PostPost]: ApiResSchema<{ post: IPost }>
+  [ApiCode.LikePost]: ApiResSchema<{ state: boolean }>
+  [ApiCode.BookmarkPost]: ApiResSchema<{ state: boolean }>
 
   [ApiCode.GetUser]: ApiResSchema<{ users: IUser[] }>
   [ApiCode.SetUser]: ApiResSchema<{}>

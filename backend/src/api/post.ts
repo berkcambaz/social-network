@@ -57,3 +57,11 @@ export async function getPost(req: ReqType, res: ResType, userId: number, data: 
   });
   return res.send({ data: { posts } });
 }
+
+export async function likePost(req: ReqType, res: ResType, userId: number, data: ApiReq[ApiCode.LikePost]) {
+
+}
+
+export async function bookmarkPost(req: ReqType, res: ResType, userId: number, data: ApiReq[ApiCode.LikePost]) {
+
+}
